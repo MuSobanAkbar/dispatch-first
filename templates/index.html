@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Categorizer</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        textarea { width: 100%; height: 120px; margin-bottom: 10px; padding: 8px; }
+        button { padding: 10px 16px; cursor: pointer; }
+        #result { margin-top: 20px; font-weight: bold; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <h1>Email Categorizer</h1>
+
+
+    <textarea id="email-input" placeholder="Paste customer email here..."></textarea>
+    <br>
+
+
+    <button id="submit-btn" onclick="sendEmail()">Categorize Email</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function sendEmail() {
+            const emailText = document.getElementById("email-input").value;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = "Categorizing...";
+
+
+            const response = await fetch("/categorize", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: emailText })
+            });
+
+            const data = await response.json();
+            resultDiv.innerText = "Category: " + data.category;
+        }
+    </script>
+</body>
+</html>
