@@ -1,9 +1,10 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
-import llm 
-from fastapi.responses import FileResponse 
-from prompts import get_prompt
-from prompts import CATEGORIES
+
+import llm
+from prompts import CATEGORIES, get_prompt
+
 app = FastAPI()
 
 class CategoryRequest(BaseModel):

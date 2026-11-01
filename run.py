@@ -1,6 +1,6 @@
-import asyncio
 from dotenv import load_dotenv
-import llm 
+
+import llm
 from prompts import get_prompt
 
 load_dotenv() # get all the env variables eg groqs
