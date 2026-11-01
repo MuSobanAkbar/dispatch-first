@@ -1,7 +1,5 @@
+from fastapi.testclient import TestClient 
 from unittest.mock import patch
-
-from fastapi.testclient import TestClient
-
 from app import app
 
 client = TestClient(app)
@@ -16,6 +14,6 @@ def test_health_check():
 
 def test_categorize_email():
     with patch("app.llm.complete", return_value="hours  "):
-        response = client.post("/categorize", json={"email_body": "What time do you open on weekends?"})
+        response = client.post("/categorize", json={"email": "What time do you open on weekends?"})
         assert response.status_code == 200
         assert response.json() == {"category": "hours"}
