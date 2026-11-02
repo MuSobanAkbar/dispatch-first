@@ -1,7 +1,8 @@
 import json
 import sys
+
 import llm
-from prompts import CATEGORIES, get_prompt
+from prompts import get_prompt
 
 DATASET_PATH = "evals/dataset.jsonl"
 MIN_SCORE = 0.85  
