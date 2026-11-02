@@ -36,7 +36,11 @@
             });
 
             const data = await response.json();
-            resultDiv.innerText = "Category: " + data.category;
+            if (data.requires_human) {
+            resultDiv.innerHTML = `Category: <strong>${data.category}</strong> ⚠️ <em>Escalated to Human Agent</em>`;
+            } else {
+            resultDiv.innerHTML = `Category: <strong>${data.category}</strong>`;
+            }
         }
     </script>
 </body>

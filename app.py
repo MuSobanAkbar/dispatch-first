@@ -17,8 +17,10 @@ def categorize_email(request: CategoryRequest):
     category = llm.complete(prompt).lower().strip()  # Convert to lowercase and strip whitespace
     if category not in CATEGORIES:
        category = "other"  # Default to "other" if the category is not recognized
+
+    requires_human = category == "complaint"
     
-    return {"category": category}
+    return {"category": category, "requires_human": requires_human}
 
 @app.get("/health")
 def health_check():
