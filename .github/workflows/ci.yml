@@ -21,4 +21,8 @@ jobs:
       - name: Run unit tests
         run: pytest
       - name: verify docker builds
-        run: docker build -t dispatch-first .
+        run: docker build -t dispatch-first .\
+      - name: Eval tests
+        env: 
+          GROQ_API_KEY: ${{secrets.GROQ_API_KEY}}
+        run: python eval.py
