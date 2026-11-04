@@ -3,7 +3,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 import llm
-from prompts import CATEGORIES, get_prompt
+from prompts import CATEGORIES, get_prompt, get_reply_prompt, load_faq
 
 app = FastAPI()
 
@@ -19,8 +19,15 @@ def categorize_email(request: CategoryRequest):
        category = "other"  # Default to "other" if the category is not recognized
 
     requires_human = category == "complaint"
-    
-    return {"category": category, "requires_human": requires_human}
+
+
+    if requires_human:
+        return {"category": category, "requires_human": True}
+    else:
+        faq = load_faq()
+        reply_prompt = get_reply_prompt(request.email, category, faq)
+        reply = llm.complete(reply_prompt).strip()
+    return {"category": category, "requires_human": requires_human, "reply": reply}
 
 @app.get("/health")
 def health_check():
