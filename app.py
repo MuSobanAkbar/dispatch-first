@@ -22,7 +22,7 @@ def categorize_email(request: CategoryRequest):
 
 
     if requires_human:
-        return {"category": category, "requires_human": True}
+        return {"category": category, "requires_human": True, "reply": None}
     else:
         faq = load_faq()
         reply_prompt = get_reply_prompt(request.email, category, faq)
