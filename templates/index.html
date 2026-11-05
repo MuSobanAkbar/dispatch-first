@@ -11,14 +11,14 @@
     </style>
 </head>
 <body>
-    <h1>Email Categorizer</h1>
+    <h1>Dispatch First</h1>
 
 
     <textarea id="email-input" placeholder="Paste customer email here..."></textarea>
     <br>
 
 
-    <button id="submit-btn" onclick="sendEmail()">Categorize Email</button>
+    <button id="submit-btn" onclick="sendEmail()">Get Response</button>
 
     <div id="result"></div>
 
@@ -26,7 +26,7 @@
         async function sendEmail() {
             const emailText = document.getElementById("email-input").value;
             const resultDiv = document.getElementById("result");
-            resultDiv.innerText = "Categorizing...";
+            resultDiv.innerText = "Getting your response...";
 
 
             const response = await fetch("/categorize", {
@@ -39,7 +39,7 @@
             if (data.requires_human) {
             resultDiv.innerHTML = `Category: <strong>${data.category}</strong> ⚠️ <em>Escalated to Human Agent</em>`;
             } else {
-            resultDiv.innerHTML = `Category: <strong>${data.category}</strong>`;
+            resultDiv.innerHTML = `Category: <strong>${data.category}</strong><br><br>Suggested Reply:<br>${data.reply}`;
             }
         }
     </script>
