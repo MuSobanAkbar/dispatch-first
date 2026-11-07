@@ -10,7 +10,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY") # load the groq api key from the env fi
 INPUT_PRICE_PER_M = 0.15 # input price per 1 million tokens 
 OUTPUT_PRICE_PER_M = 0.60 # output price per 1 million tokens
 
-LAST_CALL_META = {
+LAST_CALL_META = { #stores metadata about the last call to the LLM
     "model": "openai/gpt-oss-120b",
     "prompt_tokens": 0,
     "completion_tokens": 0,

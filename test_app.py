@@ -45,3 +45,9 @@ def test_complaint_triggers_human_guardrail():
             "requires_human": True,
             "reply": None,
         }
+
+def test_metrics_endpoint():
+    response = client.get("/metrics")
+    assert response.status_code ==200
+    assert "dispatch_emails_total" in response.text
+    assert "dispatch_tokens_total" in response.text
