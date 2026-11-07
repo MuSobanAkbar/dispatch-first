@@ -3,11 +3,11 @@ import json
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, Response
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from pydantic import BaseModel
-from prometheus_client import CONTENT_TYPE_LATEST, Counter, generate_latest, Histogram
+
 import llm
 from prompts import CATEGORIES, PROMPT_V, get_prompt, get_reply_prompt, load_faq
-
 
 # prometheus metrics for total emails categorized, total tokens used, total cost in USD, and latency in seconds
 REQUEST_COUNT = Counter(
