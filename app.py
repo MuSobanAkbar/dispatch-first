@@ -1,8 +1,9 @@
 
 import json
-from langfuse import observe
+
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, Response
+from langfuse import observe
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from pydantic import BaseModel
 
