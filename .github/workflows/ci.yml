@@ -25,4 +25,5 @@ jobs:
       - name: Eval tests
         env: 
           GROQ_API_KEY: ${{secrets.GROQ_API_KEY}}
+          LANGFUSE_TRACING_ENABLED: "false"
         run: python eval.py
