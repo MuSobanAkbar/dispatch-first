@@ -1,0 +1,22 @@
+groups:
+  - name: dispatch_slo_alerts
+    rules:
+      # Alert 1: Latency SLO Breach (Average LLM latency > 3.0 seconds)
+      - alert: HighLLMLatency
+        expr: (dispatch_latency_seconds_sum / dispatch_latency_seconds_count) > 3.0
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High LLM Latency (> 3s)"
+          description: "Average LLM latency has exceeded the 3.0s SLO target."
+
+      # Alert 2: High Complaint / Fallback Spike (> 5 complaints recorded)
+      - alert: ComplaintSpike
+        expr: dispatch_emails_total{category="complaint"} >= 3
+        for: 5s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Spike in customer complaints requiring human review"
+          description: "3 or more complaint emails have piled up in the human review queue."
