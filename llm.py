@@ -1,6 +1,6 @@
 import os
 import time
-
+from langfuse.decorators import observe
 from dotenv import load_dotenv
 from groq import Groq
 
@@ -23,7 +23,8 @@ def reset_last_call_meta():
     LAST_CALL_META["completion_tokens"] = 0
     LAST_CALL_META["cost_usd"] = 0.0
     LAST_CALL_META["latency_ms"] = 0
-    
+
+@observe(as_type="generation") # tells langfuse to observe this function as an ai llm call
 def complete(prompt: str) -> str:
     groqClient = Groq(api_key=GROQ_API_KEY) # create a groq client instance
     start_time = time.perf_counter() # start the timer

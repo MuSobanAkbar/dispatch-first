@@ -1,4 +1,4 @@
-
+from langfuse.decorators import observe
 import json
 
 from fastapi import FastAPI
