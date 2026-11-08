@@ -1,6 +1,6 @@
-from langfuse.decorators import observe
-import json
 
+import json
+from langfuse import observe
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, Response
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
@@ -44,6 +44,7 @@ def metrics():
 # generate_latest() takes all the counter and histogram metrics and returns them in a format that prometheus can scrape
 
 @app.post("/categorize")
+@observe()
 def categorize_email(request: CategoryRequest):
     llm.reset_last_call_meta() # Reset the last call metadata at the start of each request
     prompt = get_prompt(request.email)
