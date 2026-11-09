@@ -3,7 +3,7 @@ global:
 
 
 rule_files:
-  - "alert_rules.yml"
+  - "alerts.yml"
 
 scrape_configs:
   - job_name: "dispatch-app"

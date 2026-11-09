@@ -1,0 +1,40 @@
+{
+  "title": "Dispatch LLM Observability",
+  "uid": "dispatch-llm",
+  "schemaVersion": 39,
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Emails by Category",
+      "type": "bargauge",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "dispatch_emails_total", "legendFormat": "{{category}}"}]
+    },
+    {
+      "id": 2,
+      "title": "Tokens Used (Prompt vs Completion)",
+      "type": "stat",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "dispatch_tokens_total", "legendFormat": "{{type}}"}]
+    },
+    {
+      "id": 3,
+      "title": "Total LLM Cost (USD)",
+      "type": "stat",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "dispatch_cost_usd_total", "legendFormat": "USD"}]
+    },
+    {
+      "id": 4,
+      "title": "Average Request Latency (Seconds)",
+      "type": "gauge",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "dispatch_latency_seconds_sum / dispatch_latency_seconds_count", "legendFormat": "Avg Seconds"}]
+    }
+  ]
+}
