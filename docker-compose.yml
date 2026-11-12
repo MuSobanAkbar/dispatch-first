@@ -21,3 +21,5 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./ops/grafana/provisioning:/etc/grafana/provisioning:ro
